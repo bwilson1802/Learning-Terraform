@@ -110,7 +110,7 @@ resource "azurerm_application_security_group" "RTR-appsecuritygroup" {
   name                = "RTR-appsecuritygroup"
   location            = azurerm_resource_group.Demo-RG.location
   resource_group_name = azurerm_resource_group.Demo-RG.name
-  depends_on = "azurerm_network_interface" "RTR-Pub-NIC"
+  depends_on = [azurerm_network_interface.RTR-Pub-NIC]
   
   tags = {
     environment = "Dev"
@@ -122,7 +122,7 @@ resource "azurerm_public_ip" "RTR-Pub-Network" {
   resource_group_name = azurerm_resource_group.Demo-RG.name
   location            = azurerm_resource_group.Demo-RG.location
   allocation_method   = "Dynamic"
-  depends_on = "azurerm_network_interface" "RTR-Pub-NIC"
+  depends_on = [azurerm_network_interface.RTR-Pub-NIC]
   
   tags = {
     environment = "Dev"
@@ -153,7 +153,7 @@ resource "azurerm_application_security_group" "RTR-LON-appsecuritygroup" {
   name                = "RTR-LON-appsecuritygroup"
   location            = azurerm_resource_group.Demo-RG.location
   resource_group_name = azurerm_resource_group.Demo-RG.name
-  depends_on = "azurerm_network_interface" "RTR-LON-NIC"
+  depends_on = [azurerm_network_interface.RTR-LON-NIC]
   
   tags = {
     environment = "Dev"
@@ -165,14 +165,14 @@ resource "azurerm_subnet" "LON-Subnet" {
   resource_group_name  = azurerm_resource_group.Demo-RG.name
   virtual_network_name = azurerm_virtual_network.Demo-Network.name
   address_prefixes     = ["10.10.1.0/26"]
-  depends_on = "azurerm_network_interface" "RTR-LON-NIC"
+  depends_on = [azurerm_network_interface.RTR-LON-NIC]
 }
 
 resource "azurerm_network_security_group" "RTR-LON-Sec-Group" {
   name                = "RTR-LON-Sec-Group"
   location            = azurerm_resource_group.Demo-RG.location
   resource_group_name = azurerm_resource_group.Demo-RG.name
-  depends_on = "azurerm_network_interface" "RTR-LON-NIC"
+  depends_on = [azurerm_network_interface.RTR-LON-NIC]
 
   security_rule {
     name                       = "test123"
@@ -211,7 +211,7 @@ resource "azurerm_application_security_group" "RTR-NA-appsecuritygroup" {
   name                = "RTR-NA-appsecuritygroup"
   location            = azurerm_resource_group.Demo-RG.location
   resource_group_name = azurerm_resource_group.Demo-RG.name
-  depends_on = "azurerm_network_interface" "RTR-NA-NIC"
+  depends_on = [azurerm_network_interface.RTR-NA-NIC]
   
   tags = {
     environment = "Dev"
@@ -223,14 +223,14 @@ resource "azurerm_subnet" "NA-Subnet" {
   resource_group_name  = azurerm_resource_group.Demo-RG.name
   virtual_network_name = azurerm_virtual_network.Demo-Network.name
   address_prefixes     = ["10.10.2.0/26"]
-  depends_on = "azurerm_network_interface" "RTR-NA-NIC"
+  depends_on = [azurerm_network_interface.RTR-NA-NIC]
 }
 
 resource "azurerm_network_security_group" "RTR-NA-Sec-Group" {
   name                = "RTR-NA-Sec-Group"
   location            = azurerm_resource_group.Demo-RG.location
   resource_group_name = azurerm_resource_group.Demo-RG.name
-  depends_on = "azurerm_network_interface" "RTR-NA-NIC"
+  depends_on = [azurerm_network_interface.RTR-NA-NIC]
 
   security_rule {
     name                       = "test123"
@@ -269,7 +269,7 @@ resource "azurerm_application_security_group" "RTR-PAC-appsecuritygroup" {
   name                = "RTR-PAC-appsecuritygroup"
   location            = azurerm_resource_group.Demo-RG.location
   resource_group_name = azurerm_resource_group.Demo-RG.name
-  depends_on = "azurerm_network_interface" "RTR-PAC-NIC"
+  depends_on = [azurerm_network_interface.RTR-PAC-NIC]
   
   tags = {
     environment = "Dev"
@@ -281,14 +281,14 @@ resource "azurerm_subnet" "PAC-Subnet" {
   resource_group_name  = azurerm_resource_group.Demo-RG.name
   virtual_network_name = azurerm_virtual_network.Demo-Network.name
   address_prefixes     = ["10.10.3.0/26"]
-  depends_on = "azurerm_network_interface" "RTR-PAC-NIC"
+  depends_on = [azurerm_network_interface.RTR-PAC-NIC]
 }
 
 resource "azurerm_network_security_group" "RTR-PAC-Sec-Group" {
   name                = "RTR-PAC-Sec-Group"
   location            = azurerm_resource_group.Demo-RG.location
   resource_group_name = azurerm_resource_group.Demo-RG.name
-  depends_on = "azurerm_network_interface" "RTR-PAC-NIC"
+  depends_on = [azurerm_network_interface.RTR-PAC-NIC]
 
   security_rule {
     name                       = "test123"
