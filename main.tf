@@ -434,3 +434,5 @@ resource "azurerm_windows_virtual_machine" "PAC-DC1" {
     version   = "latest"
   }
 }
+
+//Test comment
