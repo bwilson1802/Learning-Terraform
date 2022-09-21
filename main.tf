@@ -1,7 +1,7 @@
 ###################################
-# Test script, Do not add to repo #
+# Dev Test script,                #
 # Password hardcoded in           #
-# Networking                      #
+# Networking issues               #
 ###################################
 
 ################
