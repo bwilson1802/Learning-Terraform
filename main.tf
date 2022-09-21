@@ -40,7 +40,7 @@ resource "azurerm_virtual_network" "Demo-Network" {
   name                = "Demo-Network"
   resource_group_name = azurerm_resource_group.Demo-RG.name
   location            = azurerm_resource_group.Demo-RG.location
-  address_space       = ["10.10.0.0/26"]
+  address_space       = ["10.10.0.0/16"]
 }
 
 resource "azurerm_network_security_group" "Demo-Sec-Group" {
@@ -82,7 +82,7 @@ resource "azurerm_subnet" "RTR-Subnet" {
   name                 = "RTR-subnet"
   resource_group_name  = azurerm_resource_group.Demo-RG.name
   virtual_network_name = azurerm_virtual_network.Demo-Network.name
-  address_prefixes     = ["10.10.0.192/26"]
+  address_prefixes     = ["10.10.0.0/24"]
 }
 
 resource "azurerm_subnet_network_security_group_association" "RTR-Subnet-Sec-Group" {
@@ -96,7 +96,7 @@ resource "azurerm_subnet" "LON-Subnet" {
   name                 = "LON-subnet"
   resource_group_name  = azurerm_resource_group.Demo-RG.name
   virtual_network_name = azurerm_virtual_network.Demo-Network.name
-  address_prefixes     = ["10.10.0.0/26"]
+  address_prefixes     = ["10.10.1.0/24"]
   
 }
 
@@ -111,7 +111,7 @@ resource "azurerm_subnet" "NA-Subnet" {
   name                 = "NA-subnet"
   resource_group_name  = azurerm_resource_group.Demo-RG.name
   virtual_network_name = azurerm_virtual_network.Demo-Network.name
-  address_prefixes     = ["10.10.0.64/26"]
+  address_prefixes     = ["10.10.2.0/24"]
 }
 
 resource "azurerm_subnet_network_security_group_association" "NA-Subnet-Sec-Group" {
@@ -125,7 +125,7 @@ resource "azurerm_subnet" "PAC-Subnet" {
   name                 = "PAC-subnet"
   resource_group_name  = azurerm_resource_group.Demo-RG.name
   virtual_network_name = azurerm_virtual_network.Demo-Network.name
-  address_prefixes     = ["10.10.0.128/26"]
+  address_prefixes     = ["10.10.3.0/24"]
 }
 
 resource "azurerm_subnet_network_security_group_association" "PAC-Subnet-Sec-Group" {
