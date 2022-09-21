@@ -255,13 +255,172 @@ resource "azurerm_application_security_group" "RTR-PAC-appsecuritygroup" {
 ##########################
 
 resource "azurerm_windows_virtual_machine" "RTR" {
-  name                = "RTR-VM"
+  name                = "RTR"
   resource_group_name = azurerm_resource_group.Demo-RG.name
   location            = azurerm_resource_group.Demo-RG.location
   size                = "Standard_B2s"
   admin_username      = "adminuser"
   admin_password      = "1qaz2wsx!QAZ@WSX"
   network_interface_ids = [azurerm_network_interface.RTR-Pub-NIC.id, azurerm_network_interface.RTR-NA-NIC.id, azurerm_network_interface.RTR-PAC-NIC.id, azurerm_network_interface.RTR-LON-NIC.id]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "StandardSSD_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
+    version   = "latest"
+  }
+}
+
+##########################
+# LON-DC1 VM                 #
+##########################
+
+resource "azurerm_network_interface" "LON-DC1-NIC" {
+  name                = "LON-DC1-NIC"
+  location            = azurerm_resource_group.Demo-RG.location
+  resource_group_name = azurerm_resource_group.Demo-RG.name
+
+  ip_configuration {
+    name                          = "LON-Network"
+    subnet_id                     = azurerm_subnet.LON-Subnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.RTR-Pub-Network.id
+  }
+  
+  tags = {
+    enviornment = "dev"
+  }
+}
+
+resource "azurerm_application_security_group" "LON-DC1-appsecuritygroup" {
+  name                = "LON-DC1-appsecuritygroup"
+  location            = azurerm_resource_group.Demo-RG.location
+  resource_group_name = azurerm_resource_group.Demo-RG.name
+  
+  tags = {
+    environment = "Dev"
+  }
+}
+
+resource "azurerm_windows_virtual_machine" "LON-DC1" {
+  name                = "LON-DC1"
+  resource_group_name = azurerm_resource_group.Demo-RG.name
+  location            = azurerm_resource_group.Demo-RG.location
+  size                = "Standard_B2s"
+  admin_username      = "adminuser"
+  admin_password      = "1qaz2wsx!QAZ@WSX"
+  network_interface_ids = [azurerm_network_interface.LON-DC1-NIC.id]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "StandardSSD_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
+    version   = "latest"
+  }
+}
+
+##########################
+# NA DC1 VM              #
+##########################
+
+resource "azurerm_network_interface" "NA-DC1-NIC" {
+  name                = "NA-DC1-NIC"
+  location            = azurerm_resource_group.Demo-RG.location
+  resource_group_name = azurerm_resource_group.Demo-RG.name
+
+  ip_configuration {
+    name                          = "NA-Network"
+    subnet_id                     = azurerm_subnet.NA-Subnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.RTR-Pub-Network.id
+  }
+  
+  tags = {
+    enviornment = "dev"
+  }
+}
+
+resource "azurerm_application_security_group" "NA-DC1-appsecuritygroup" {
+  name                = "NA-DC1-appsecuritygroup"
+  location            = azurerm_resource_group.Demo-RG.location
+  resource_group_name = azurerm_resource_group.Demo-RG.name
+  
+  tags = {
+    environment = "Dev"
+  }
+}
+
+resource "azurerm_windows_virtual_machine" "NA-DC1" {
+  name                = "NA-DC1"
+  resource_group_name = azurerm_resource_group.Demo-RG.name
+  location            = azurerm_resource_group.Demo-RG.location
+  size                = "Standard_B2s"
+  admin_username      = "adminuser"
+  admin_password      = "1qaz2wsx!QAZ@WSX"
+  network_interface_ids = [azurerm_network_interface.NA-DC1-NIC.id]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "StandardSSD_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
+    version   = "latest"
+  }
+}
+
+##########################
+# PAC DC1 VM             #
+##########################
+
+resource "azurerm_network_interface" "PAC-DC1-NIC" {
+  name                = "PAC-DC1-NIC"
+  location            = azurerm_resource_group.Demo-RG.location
+  resource_group_name = azurerm_resource_group.Demo-RG.name
+
+  ip_configuration {
+    name                          = "PAC-Network"
+    subnet_id                     = azurerm_subnet.PAC-Subnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.RTR-Pub-Network.id
+  }
+  
+  tags = {
+    enviornment = "dev"
+  }
+}
+
+resource "azurerm_application_security_group" "PAC-DC1-appsecuritygroup" {
+  name                = "PAC-DC1-appsecuritygroup"
+  location            = azurerm_resource_group.Demo-RG.location
+  resource_group_name = azurerm_resource_group.Demo-RG.name
+  
+  tags = {
+    environment = "Dev"
+  }
+}
+
+resource "azurerm_windows_virtual_machine" "PAC-DC1" {
+  name                = "PAC-DC1"
+  resource_group_name = azurerm_resource_group.Demo-RG.name
+  location            = azurerm_resource_group.Demo-RG.location
+  size                = "Standard_B2s"
+  admin_username      = "adminuser"
+  admin_password      = "1qaz2wsx!QAZ@WSX"
+  network_interface_ids = [azurerm_network_interface.PAC-DC1-NIC.id]
 
   os_disk {
     caching              = "ReadWrite"
