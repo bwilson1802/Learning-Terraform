@@ -1,6 +1,6 @@
 ###################################
 # Dev Test script,                #
-# No Passwords                    #
+# Passwords hardcoded             #
 #                                 #
 ###################################
 
