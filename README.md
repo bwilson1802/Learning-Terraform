@@ -12,6 +12,8 @@ Azure CLI or choco install azure-cli
 Azure PowerShell or choco install azurepowershell
 
 # VS code setup
+Download the following 
+
 Docker
 Github
 Powershell
