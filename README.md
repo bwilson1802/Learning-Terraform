@@ -1,8 +1,8 @@
-#Terraform Project
+# Terraform Project
 
-#This is my journey to learn Git and Terraform.  I am new to both but wanted to document my journey and have a document that I can reference in the future.  I am on a windows machine for reference.   
+# This is my journey to learn Git and Terraform.  I am new to both but wanted to document my journey and have a document that I can reference in the future.  I am on a windows machine for reference.   
 
-#The goal of this project is to use Terraform to install a multi-region network in Azure. 
+# The goal of this project is to use Terraform to install a multi-region network in Azure. 
 
 # System setup
 Git or choco install git
