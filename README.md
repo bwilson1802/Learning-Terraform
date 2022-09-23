@@ -11,6 +11,21 @@
 4.	Azure CLI or choco install azure-cli
 5.	Azure PowerShell or choco install azurepowershell
 
+# GIT setup (bash terminal)
+1.	git config –global user.name “Brian“
+2.	git config –global user.email “Brian@mydomain.com”
+3.	git config –global core.editor “notepad.exe” or “atom –wait”
+4.	git config –global color.ui true
+5.	git config –list (shows configs)
+# GitHub setup (web browser)
+1.	Log in to GitHub and create a new repository 
+2.	You need the link to the code.  The best way is to navigate to the repository and on the code tab there is a dropdown.  Copy the https
+
+# First clone (bash terminal)
+1.  	Ls (look where you are located) add a repo folder
+2.	Cd <repo name>
+3.	Git clone (paste the link from your github repository) 
+	
 # VS code setup
 
 Download the following 
@@ -31,22 +46,4 @@ Azure Storage Explorer
 
 YAML
 
-Markdown All in One
-
-# GIT setup (bash terminal)
-1.	git config –global user.name “Brian“
-2.	git config –global user.email “Brian@mydomain.com”
-3.	git config –global core.editor “notepad.exe” or “atom –wait”
-4.	git config –global color.ui true
-5.	git config –list (shows configs)
-# GitHub setup (web browser)
-1.	Log in to GitHub and create a new repository 
-2.	You need the link to the code.  The best way is to navigate to the repository and on the code tab there is a dropdown.  Copy the https
-
-# First clone (bash terminal)
-1.  	Ls (look where you are located) add a repo folder
-2.	Cd <repo name>
-3.	Git clone (paste the link from your github repository) 
-	
-# VS code
-	
+Markdown All in One	
