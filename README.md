@@ -50,7 +50,7 @@ or “<atom> –wait” or your favorite
 
 # First clone (bash terminal)
 1.	Ls (look where you are located) add a repo folder
-2.	Cd <repo name>
+2.	Cd /<repo name>
 3.	Git clone (paste the link from your github repository) 
 	
 # VS code
