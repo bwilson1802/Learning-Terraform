@@ -5,7 +5,7 @@ This is my journey to learn Git and Terraform.  I am new to both but wanted to d
 The goal of this project is to use Terraform to install a multi-region network in Azure. 
 
 # Notes
-1.	<example>  This tells you to put your info inside and delete the <>
+1.	<>  This tells you to put your info inside and delete the <>
 2.	 Choco is a site that helps you download software.  It can be used in a bash terminal to go get the software for you.  
 3.	 
 4.	 
@@ -24,11 +24,11 @@ The goal of this project is to use Terraform to install a multi-region network i
 	e.	 or choco install azurepowershell
 
 # GIT setup (bash terminal)
-1.	git config –global user.name “<Brian>“
-2.	git config –global user.email “<Brian@mydomain.com>”
-3.	git config –global core.editor “<notepad.exe>” 
-or “<atom> –wait” or your favorite
-4.    git config –global color.ui true (false is black and white)
+1.	git config --global user.name “<Brian>“
+2.	git config --global user.email “<Brian@mydomain.com>”
+3.	git config --global core.editor “notepad.exe” 
+or “atom --wait” or your favorite
+4.    git config --global color.ui true (false is black and white)
 5.	git config –list (shows configs)
 
 # VS code setup
