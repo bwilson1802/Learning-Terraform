@@ -57,16 +57,44 @@ or “atom --wait” or your favorite
 1.    Log in to GitHub and create a new repository 
 2.    You need the link to the code.  The best way is to navigate to the repository and on the code tab there is a dropdown.  Copy the https
 
-# First clone (bash terminal)
-1.	Ls (look where you are located) add a repo folder
-2.	Cd repo name
-3.	Git clone (paste the link from your github repository) 
+# Folder/File setup (bash terminal)
+1.	Ls or dir (look where you are located) 
+2.	Cd to the dir you want to be
+3.	Mkdir (name your dir) (if needed)
+4.	Git clone (paste the link from your github repository) 
+5.	Git init (creates a dot file) (you wont see it with ls unless you ls -la)
+6.	
 	
 # VS code
+1.	Open VS code and select file, open folder
+2.	Select file, new file, name it main.tf
+
+# main.tf
+1.	The goal of our first Terraform code is to make sure everything is working.  Add the following to the main.tf file you created.  
+
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+}
+
+# Configure the Microsoft Azure Provider
+provider "azurerm" {
+  features {}
+}
+
+resource "azurerm_resource_group" "East_US_RG" {
+  name     = "East_US_RG"
+  location = "East US"
+}
+
 	
 
 
 
 
 
-John Savill bicep class
+
