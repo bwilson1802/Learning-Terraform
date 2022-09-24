@@ -69,11 +69,15 @@ or “atom --wait” or your favorite
 1.	Open VS code and select file, open folder
 2.	Select file, new file, name it main.tf
 
-# main.tf
-1.	The goal of our first Terraform code is to make sure everything is working.  Add the following to the main.tf file you created.  
-2.      Copy the contents from the mainsetup.tf file and place it into your main.tf file
+# main.tf (VS Code)
+1.	The goal of our first Terraform code is to make sure everything is working.  Add the following to the main.tf file you created. 
+2.	Copy the contents of mainsetup.tf and place it in your main.tf file
+3.	Once you have added the code, ctrl + s saves your changes
 
-	
+# First commit (bash terminal)
+1.	Git add . (adds all changes in that dir)
+2.	Git commit -m (“add your message here”)
+3.	You can view the commit messages to track your changes.  Make sure you have a good message here on the changes you made.  
 
 
 
