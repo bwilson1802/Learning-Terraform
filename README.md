@@ -75,8 +75,8 @@ or “atom --wait” or your favorite
 # First commit (bash terminal)
 1.	Git add . (adds all changes in that dir)
 2.	Git commit -m (“add your message here”)
-3.	You can view the commit messages to track your changes.  Make sure you have a good message here on the changes you made.  
-
+3.	You can view the commit messages to track your changes.  Make sure you have a good message here on the changes you made.  You can type git log and it will show all commits that have been made to the project.  
+ 
 
 
 
