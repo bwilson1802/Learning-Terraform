@@ -55,15 +55,13 @@ or “atom --wait” or your favorite
 
 # GitHub setup (web browser)
 1.    Log in to GitHub and create a new repository 
-2.    You need the link to the code.  The best way is to navigate to the repository and on the code tab there is a dropdown.  Copy the https
+2.    You need the link to the code later.  Note where to find it for later use.  The best way is to navigate to the repository and on the code tab there is a dropdown.  Copy the https
 
 # Folder/File setup (bash terminal)
 1.	Ls or dir (look where you are located) 
 2.	Cd to the dir you want to be
 3.	Mkdir (name your dir) (if needed)
-4.	Git clone (paste the link from your github repository) 
-5.	Git init (creates a dot file) (you wont see it with ls unless you ls -la)
-6.	
+	
 	
 # VS code
 1.	Open VS code and select file, open folder
