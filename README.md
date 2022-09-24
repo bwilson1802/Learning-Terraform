@@ -1,6 +1,6 @@
 # Terraform Project
 
-This is my journey to learn Git and Terraform.  I am new to both but wanted to document my journey and have a document that I can reference in the future.  I am on a windows machine for reference.  If you have updates, questions, or I wrote something wrong, please let me know!   
+This is my journey to learn Git and Terraform with Azure.  I am new to both but wanted to document my journey and have a document that I can reference in the future.  I am on a windows machine for reference.  If you have updates, questions, or I wrote something wrong, please let me know!   
 
 The goal of this project is to use Terraform to install a multi-region network in Azure. 
 
@@ -71,25 +71,7 @@ or “atom --wait” or your favorite
 
 # main.tf
 1.	The goal of our first Terraform code is to make sure everything is working.  Add the following to the main.tf file you created.  
-
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=3.0.0"
-    }
-  }
-}
-
-# Configure the Microsoft Azure Provider
-provider "azurerm" {
-  features {}
-}
-
-resource "azurerm_resource_group" "East_US_RG" {
-  name     = "East_US_RG"
-  location = "East US"
-}
+2.      Copy the contents from the mainsetup.tf file and place it into your main.tf file
 
 	
 
