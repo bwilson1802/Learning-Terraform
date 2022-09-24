@@ -33,7 +33,7 @@ The goal of this project is to use Terraform to install a multi-region network i
     e.	 or choco install azurepowershell
 
 # GIT setup (bash terminal)
-1.	git config --global user.name “<Brian>“
+1.	git config --global user.name “<Brian......>“
 2.	git config --global user.email “<Brian@mydomain.com>”
 3.	git config --global core.editor “notepad.exe” 
 or “atom --wait” or your favorite
