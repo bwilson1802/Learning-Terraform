@@ -13,15 +13,24 @@ The goal of this project is to use Terraform to install a multi-region network i
 
 # System setup
 1.	Git 
-	a.	or choco install git
+
+    a.	or choco install git
+
 2.	Visual Studio Code 
-	b.	or choco install vscode.install
+
+    b.	or choco install vscode.install
+
 3.	Terraform 
-	c.	or choco install terraform
+
+    c.	or choco install terraform
+
 4.	Azure CLI 
-	d.	or choco install azure-cli
+
+    d.	or choco install azure-cli
+
 5.	Azure PowerShell 
-	e.	 or choco install azurepowershell
+
+    e.	 or choco install azurepowershell
 
 # GIT setup (bash terminal)
 1.	git config --global user.name “<Brian>“
