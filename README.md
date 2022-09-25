@@ -14,7 +14,6 @@ Kevin Skoglund - Git Essentials training - LinkedIn Learning
 Josh Samuelson - Learning Terraform - LinkedIn Learning
 
 
-
 # My file breakdown 
 
 # Step 1
@@ -22,7 +21,7 @@ Git and VS code setup
 Test Terraform on your system
 
 # Step 2
-Bulid one VM and a network in Azure
+Build one VM and a network in Azure
 
 # Step 3
 Build a peered network in 2 regions
@@ -36,14 +35,14 @@ AWS build - Does not work
 # Future goals!
 
 
-
 # Step 6 
-Use varriable to avoid hardcoding
+Use variable to avoid hardcoding
 
 # Step 7 
 Multi provider deployment
 
 # Step 8 
+
 
 
 
