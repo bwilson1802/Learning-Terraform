@@ -9,8 +9,11 @@ I want to first and foremost give credit where credit is due!
 My Mentors ArielRam99 & robertdias
 
 Git flight rules - https://github.com/k88hudson/git-flight-rules - GitHub
+
 Derek Morgan - Terraform foundations with Azure - Udemy
+
 Kevin Skoglund - Git Essentials training - LinkedIn Learning
+
 Josh Samuelson - Learning Terraform - LinkedIn Learning
 
 
@@ -19,6 +22,7 @@ Josh Samuelson - Learning Terraform - LinkedIn Learning
 
 # Step 1
 Git and VS code setup
+
 Test Terraform on your system
 
 # Step 2
