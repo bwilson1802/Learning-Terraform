@@ -1,0 +1,64 @@
+# install Azure CLI
+az login
+# signin with browser 
+# if it doesnt work  az login --use device code 
+az account show
+# open folder create a new folder
+# new file main.tf
+# install terraform
+
+terraform fmt #format
+terraform init
+terraform plan
+terraform apply 
+terraform state list
+
+#### save the file ctl s or it wont work
+
+terraform apply -destroy
+terraform apply -auto-approve
+terraform state list
+terraform state show azurerm_public_ip.Test_V1
+
+#ssh key gen
+
+ssh-keygen -t rsa
+# C:\Users\bwils/.ssh/testv1key
+# no pass
+ls ~/.ssh
+
+terraform state show azurerm_linux_virtual_machine.Test_V1_VM1
+# 20.232.13.206
+# 20.169.190.25
+# 20.115.18.230
+
+
+# show os
+lsb_release -a
+docker --version
+exit
+
+terraform apply -replace azurerm_linux_virtual_machine.Test_V1_VM1
+
+terraform apply -refresh-only
+
+terraform output # gives ip for VM
+
+terraform console 
+var.host_os
+# or
+terraform console -var="host_os=linux"
+terraform console -var="host_os=sox.tfvars"
+
+var.host_os
+
+terraform console
+var.host_os == "windows" ? "powershell" : "bash"
+"powershell"
+var.host_os == "windows" ? ["powershell", "-command"] : ["bash", "-c"]
+[
+  "powershell",
+  "-command",
+]
+var.host_os != "windows" ? "bash" : "powershell" # invert
+"powershell"

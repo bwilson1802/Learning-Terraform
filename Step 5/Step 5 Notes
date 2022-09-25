@@ -1,0 +1,114 @@
+vim code_tf
+
+# change env variable to include the tarraform path
+.\terraform.exe 
+
+terraform
+
+provider "aws" {
+  profile = "default"
+  region = "us-est-2"
+}
+
+resource "aws_s3_bucket" "tf_course" {
+  bucket = "tf-course-20190913"
+  aws_s3_bucket_acl = "private" 
+  # deprecated acl error change with terraform V3 change to s3_bucket
+}
+
+# :x to exit or :q
+
+git add first_code.tf
+git commit -m "commit message"
+terraform init
+
+terraform plan
+terraform state show xxx
+terraform show
+terraform graph # (webgraphviz.com)
+terraform apply
+terraform destroy 
+terraform apply
+terraform 
+terraform 
+
+-auto-approve
+
+
+cp prod.tf terraform.tfvars
+# cat the file and append
+cat terraform.tfvars >> prod.tf
+
+
+
+# vim
+# i = insert
+# esc command mode
+# :wq   write and quit
+# :q eqix
+
+terraform applygit 
+
+<#
+Main commands:
+  init          Prepare your working directory for other commands
+  validate      Check whether the configuration is valid
+  plan          Show changes required by the current configuration
+  apply         Create or update infrastructure
+  destroy       Destroy previously-created infrastructure
+
+All other commands:
+  console       Try Terraform expressions at an interactive command prompt
+  fmt           Reformat your configuration in the standard style
+  force-unlock  Release a stuck lock on the current workspace
+  get           Install or upgrade remote Terraform modules
+  graph         Generate a Graphviz graph of the steps in an operation
+  import        Associate existing infrastructure with a Terraform resource
+  login         Obtain and save credentials for a remote host
+  logout        Remove locally-stored credentials for a remote host
+  output        Show output values from your root module
+  providers     Show the providers required for this configuration
+  refresh       Update the state to match remote systems
+  show          Show the current state or a saved plan
+  state         Advanced state management
+  taint         Mark a resource instance as not fully functional
+  untaint       Remove the 'tainted' state from a resource instance
+  version       Show the current Terraform version
+  workspace     Workspace management
+
+Global options (use these before the subcommand, if any):
+  -chdir=DIR    Switch to a different working directory before executing the
+                given subcommand.
+  -help         Show this help output, or the help for a specified subcommand.
+  -version      An alias for the "version" subcommand.
+  #> 
+
+
+
+variable "whitelist" {
+  type = list(string)
+}
+variable "web_image_id" {
+  type = string
+}
+variable "web_instance_type" {
+  type = string
+}
+variable "web_desired_capacity" {
+  type = number
+}
+variable "web_max_size" {
+  type = number
+}
+variable "web_min_size" {
+  type = number
+}
+
+
+web_image_id      = var.web_image_id 
+web_instance_type = var.web_instance_type
+web_max_size      = var.web_max_size
+web_min_size      = var.web_min_size
+subnets           = [aws_default_subnet.default_az1.id,aws_default_subnet.default_az2.id]
+security_groups   = [aws_security_group.prod_web.id]
+web_app           = "prod"
