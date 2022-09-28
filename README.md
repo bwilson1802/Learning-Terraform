@@ -36,17 +36,20 @@ Derek Morgan class deployment
 # Step 5 
 AWS build - Does not work
 
+# Step 6
+BICEP
+
 # Future goals!
 
 
-# Step 6 
+# Step 7 
 Use variable to avoid hardcoding
 
-# Step 7 
+# Step 8 
 Multi provider deployment
 
 # Step 8 
-
+Google deployment 
 
 
 

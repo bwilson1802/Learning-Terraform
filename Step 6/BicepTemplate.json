@@ -1,0 +1,234 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.10.61.36676",
+      "templateHash": "10547057559359235134"
+    }
+  },
+  "parameters": {
+    "location": {
+      "type": "string"
+    },
+    "networkInterfaceName": {
+      "type": "string"
+    },
+    "networkSecurityGroupName": {
+      "type": "string"
+    },
+    "networkSecurityGroupRules": {
+      "type": "array"
+    },
+    "subnetName": {
+      "type": "string"
+    },
+    "virtualNetworkName": {
+      "type": "string"
+    },
+    "addressPrefixes": {
+      "type": "array"
+    },
+    "subnets": {
+      "type": "array"
+    },
+    "publicIpAddressName": {
+      "type": "string"
+    },
+    "publicIpAddressType": {
+      "type": "string"
+    },
+    "publicIpAddressSku": {
+      "type": "string"
+    },
+    "pipDeleteOption": {
+      "type": "string"
+    },
+    "virtualMachineName": {
+      "type": "string"
+    },
+    "virtualMachineComputerName": {
+      "type": "string"
+    },
+    "virtualMachineRG": {
+      "type": "string"
+    },
+    "osDiskType": {
+      "type": "string"
+    },
+    "osDiskDeleteOption": {
+      "type": "string"
+    },
+    "virtualMachineSize": {
+      "type": "string"
+    },
+    "nicDeleteOption": {
+      "type": "string"
+    },
+    "adminUsername": {
+      "type": "string"
+    },
+    "adminPassword": {
+      "type": "secureString"
+    },
+    "patchMode": {
+      "type": "string"
+    },
+    "enableHotpatching": {
+      "type": "bool"
+    }
+  },
+  "variables": {
+    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
+    "vnetName": "[parameters('virtualNetworkName')]",
+    "vnetId": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "subnetRef": "[format('{0}/subnets/{1}', variables('vnetId'), parameters('subnetName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2021-03-01",
+      "name": "[parameters('networkInterfaceName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[variables('subnetRef')]"
+              },
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/publicIpAddresses', parameters('publicIpAddressName'))]",
+                "properties": {
+                  "deleteOption": "[parameters('pipDeleteOption')]"
+                }
+              }
+            }
+          }
+        ],
+        "networkSecurityGroup": {
+          "id": "[variables('nsgId')]"
+        }
+      },
+      "tags": {
+        "Dev": "Bicep"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
+        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIpAddressName'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2019-02-01",
+      "name": "[parameters('networkSecurityGroupName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "securityRules": "[parameters('networkSecurityGroupRules')]"
+      },
+      "tags": {
+        "Dev": "Bicep"
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2020-11-01",
+      "name": "[parameters('virtualNetworkName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": "[parameters('addressPrefixes')]"
+        },
+        "subnets": "[parameters('subnets')]"
+      },
+      "tags": {
+        "Dev": "Bicep"
+      }
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2020-08-01",
+      "name": "[parameters('publicIpAddressName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "publicIPAllocationMethod": "[parameters('publicIpAddressType')]"
+      },
+      "sku": {
+        "name": "[parameters('publicIpAddressSku')]"
+      },
+      "tags": {
+        "Dev": "Bicep"
+      }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2022-03-01",
+      "name": "[parameters('virtualMachineName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[parameters('virtualMachineSize')]"
+        },
+        "storageProfile": {
+          "osDisk": {
+            "createOption": "fromImage",
+            "managedDisk": {
+              "storageAccountType": "[parameters('osDiskType')]"
+            },
+            "deleteOption": "[parameters('osDiskDeleteOption')]"
+          },
+          "imageReference": {
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "2022-datacenter-azure-edition",
+            "version": "latest"
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]",
+              "properties": {
+                "deleteOption": "[parameters('nicDeleteOption')]"
+              }
+            }
+          ]
+        },
+        "osProfile": {
+          "computerName": "[parameters('virtualMachineComputerName')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]",
+          "windowsConfiguration": {
+            "enableAutomaticUpdates": true,
+            "provisionVMAgent": true,
+            "patchSettings": {
+              "enableHotpatching": "[parameters('enableHotpatching')]",
+              "patchMode": "[parameters('patchMode')]"
+            }
+          }
+        },
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": true
+          }
+        }
+      },
+      "tags": {
+        "Dev": "Bicep"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]"
+      ]
+    }
+  ],
+  "outputs": {
+    "adminUsername": {
+      "type": "string",
+      "value": "[parameters('adminUsername')]"
+    }
+  }
+}

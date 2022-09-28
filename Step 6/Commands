@@ -1,0 +1,6 @@
+az bicep build .\appPlan.bicep
+
+az deployment sub create -f ./main.bicep -l eastus -c
+# -c tests the deployment
+
+az bicep decompile -f .\location.jason
