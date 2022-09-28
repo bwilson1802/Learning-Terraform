@@ -6,7 +6,9 @@ This is my journey to learn Git and Terraform with Azure.  I am new to both but 
 
 I want to first and foremost give credit where credit is due!
 
-My Mentors ArielRam99 & robertdias
+My Mentors ArielRam99 
+
+robertdias - https://github.com/robertdias/IaC-101
 
 Git flight rules - https://github.com/k88hudson/git-flight-rules - GitHub
 
