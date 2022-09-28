@@ -18,6 +18,8 @@ Kevin Skoglund - Git Essentials training - LinkedIn Learning
 
 Josh Samuelson - Learning Terraform - LinkedIn Learning
 
+Bicep - https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep
+
 
 # My file breakdown 
 
