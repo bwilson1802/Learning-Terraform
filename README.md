@@ -6,7 +6,7 @@ This is my journey to learn Git and Terraform with Azure.  I am new to both but 
 
 I want to first and foremost give credit where credit is due!
 
-My Mentors ArielRam99 
+My Mentor ArielRam99 
 
 robertdias - https://github.com/robertdias/IaC-101
 
