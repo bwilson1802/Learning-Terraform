@@ -37,7 +37,7 @@ Derek Morgan class deployment
 AWS build - Does not work
 
 # Step 6
-BICEP
+BICEP (notes / not working)
 
 # Future goals!
 
