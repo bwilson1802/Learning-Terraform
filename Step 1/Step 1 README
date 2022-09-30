@@ -57,9 +57,10 @@ or “atom --wait” or your favorite
 # Folder/File setup (bash terminal)
 1.  Ls or dir (look where you are located) 
 2.  Cd to the dir you want to be
-3.  Mkdir (name your dir) (if needed)
+3.  Mkdir (name your dir) (if needed, mine is repos)
 4.  git init (guild the .git file
 5.  git clone (paste your repository https address) (This will copy all files in your repository main to your computer)
+6.  cd (name of your repository)
     
     
 # VS code
@@ -67,16 +68,25 @@ or “atom --wait” or your favorite
 2.  Select file, new file, name it main.tf
 
 # main.tf (VS Code)
-1.  The goal of our first Terraform code is to make sure everything is working.  Add the following to the main.tf file you created. 
-2.  Copy the contents of mainsetup.tf and place it in your main.tf file
+1.  The goal of our first Terraform code is to make sure everything is working.  
+2.  Copy the contents of mstep1main.tf and place it in your main.tf file
 3.  Once you have added the code, ctrl + s saves your changes
 
 # First commit (VS Code)
 1.  On the left side you will see source control as the third icon down.  Click it
 2.  Under changes you should see the main.tf file.  There is a plus on the right side.  Click it
-3.  Above the commit button is a message block.  For this first one just type main.tf setup.  You can also click commit and it will open a new window for you to type your message in.  Keep in mind that you can view the commit messages to track your changes.  Make sure you have a good message here on the changes you made.  You can type git log in bash and it will show all commits that have been made to the project.  
+3.  Above the commit button is a message block.  For this first one just type main.tf setup.  You can also click commit and it will open a new window for you to type your message in.  Keep in mind that you can view the commit messages to track your changes.  Make sure you have a good message here on the changes you made.  You can type git log in bash and it will show all commits that have been made to the project.
+4.  click sync
+5.  Your GitHub reposiory will now have the same data that is on your VS Code  
 
-
+# Run Terraform (bash terminal)
+1. az login (it will pop out a window for you to log in)
+2. terraform init
+3. terraform plan
+4. terraform apply -auto-approve
+5. Log in to Azure and see that you have a resource group
+6. terraform destroy -auto-approve
+7. terraform state list (make sure nothing is running)
 
 
 
@@ -100,10 +110,6 @@ or “atom --wait” or your favorite
 2.  Git commit -m (“add your message here”)
 3.  
  
-# Run your first Terraform
-1.   
 
-# checkout your repository
-1.  
 
 
