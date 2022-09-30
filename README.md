@@ -6,7 +6,7 @@ This is my journey to learn Git and Terraform with Azure.  I am new to both but 
 
 I want to first and foremost give credit where credit is due!
 
-My Mentor ArielRam99 
+My Mentor ArielRam99
 
 robertdias - https://github.com/robertdias/IaC-101
 
@@ -17,8 +17,6 @@ Derek Morgan - Terraform foundations with Azure - Udemy
 Kevin Skoglund - Git Essentials training - LinkedIn Learning
 
 Josh Samuelson - Learning Terraform - LinkedIn Learning
-
-Bicep - https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep
 
 
 # My file breakdown 
@@ -38,10 +36,10 @@ Build a peered network in 2 regions
 Derek Morgan class deployment
 
 # Step 5 
-AWS build - Does not work
+AWS build - Does not work, still learning
 
 # Step 6
-BICEP (notes / not working)
+BICEP- Does not work, still learning
 
 # Future goals!
 
