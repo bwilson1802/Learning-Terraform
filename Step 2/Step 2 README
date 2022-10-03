@@ -1,0 +1,70 @@
+In step 1 we setup a resource group.  In this step we will build on it.  
+
+# Step 2 commands (bash terminal)
+1.  Ls or dir (look where you are located) Git status displays where you are
+2.  Cd to the dir you want to be (is should say main or master)
+3.  If it still says your last branch name, git checkout main (or master)
+4.  You can open the file explorer and add folders like I have.  If you do that you have to cd to that folder.  You can also keep working out of main.tf but you will srite over your code each time.  
+5.  git pull (this bring everything to you so you have the most up to date info)
+6.  Git checkout -b (new name for this branch)
+7.  Copy Step2main.tf to your main.tf (or folder if you created them and cd to it)
+8.  Git push --set-upstream origin (your new name) (this is what tells GitHub that you made a new branch) 
+
+
+
+
+   
+
+# Understanding the code
+
+Sample code can be found on the terraform website and they give you examples to follow.  I search Azurerm (then the item.  Terraform website is hard for me to navigate)
+
+
+provider "azurerm" 
+- set your provider
+  
+resource "azurerm_resource_group" "East_US_RG" 
+- Same resource group as step 1
+  
+resource "azurerm_virtual_network" "EastUS-Network" 
+- To make a VM we need a network.  I build my networks then VMs
+
+resource "azurerm_subnet" "LOC-A-Subnet" 
+- Each network must have a subnet
+
+resource "azurerm_network_interface" "LOC-A-DC1-NIC" 
+- The VM will need a NIC to connect to the network
+
+resource "azurerm_windows_virtual_machine" "LOC-A-DC1" 
+- Add you VM.  This is a cheap one that I use to practice. 
+
+
+1.  make your changes in VS Code and save them (ctrl s)
+2.  git push
+3.  Git add . (adds all changes in that dir)
+4.  Git commit -m (“add your message here”)
+
+
+# tags
+1.  Most items can get tags.  You can make them whatever you want. 
+2.  Tags can be searched in Azure.  I use Dev so that if I see one I know to delete it at the end of the day.
+3.  Here is an example that you can add after the resource you are building.  I will use this more in the next step. 
+
+tags = {
+    enviornment = "dev"
+  }
+
+# order of operations
+1.  Terraform build in order but sometimes you will get errors.  I have found that the best way to prevent this is to add depends_on.  
+2.  I will use this in the next step but here is an example
+   
+depends_on            = [azurerm_network_interface.LOC-D-DC1-NIC]
+
+# Run Terraform (bash terminal)
+1. az login (it will pop out a window for you to log in)
+2. terraform init
+3. terraform plan
+4. terraform apply -auto-approve
+5. Log in to Azure and see that you have a resource group, a VM, a nic, and a network
+6. terraform destroy -auto-approve
+7. terraform state list (make sure nothing is running)

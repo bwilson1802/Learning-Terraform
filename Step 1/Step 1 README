@@ -69,7 +69,7 @@ or “atom --wait” or your favorite
 
 # main.tf (VS Code)
 1.  The goal of our first Terraform code is to make sure everything is working.  
-2.  Copy the contents of mstep1main.tf and place it in your main.tf file
+2.  Copy the contents of step11main.tf and place it in your main.tf file
 3.  Once you have added the code, ctrl + s saves your changes
 
 # First commit (VS Code)
@@ -88,27 +88,31 @@ or “atom --wait” or your favorite
 6. terraform destroy -auto-approve
 7. terraform state list (make sure nothing is running)
 
-
-
-
-
-# below this line still needs work!
-
 # The Git process
 1.  There are 3 trees in Git.  Repository, staging index, and working
 2.  Working is on your system.  Once you add it moves to staging.  Git commit adds to repository
-3.  Every time you log  on run Git pull to have the current copy
+3.  Every time you log on run Git pull to have the current copy
 4.  The HEAD always points to the current position of the repository (last commit)
 5.  Create a new branch each time you are adjusting the file.  Don’t commit back to main. 
-6.  Git checkout -b (new name)
-7.  Git push –set-upstream-to=origin/ <branch> testbranchbuild 
-8.  Git status displays where you are
-9.  
+ 
+# Your first Git push/pull (bash terminal)
+1.  Ls or dir (look where you are located) Git status displays where you are
+2.  Cd to the dir you want to be (is should say main or master)
+3.  git pull (this bring everything to you so you have the most up to date info)
+4.  Git checkout -b (new name for this branch)
+5.  9.  Git push --set-upstream origin (your new name) (this is what tells GitHub that you made a new branch) 
+6.  make your changes in VS Code and save them (ctrl s)
+7.  git push
+8.  Git add . (adds all changes in that dir)
+9. Git commit -m (“add your message here”)
 
-# First commit (bash terminal)
-1.  Git add . (adds all changes in that dir)
-2.  Git commit -m (“add your message here”)
-3.  
+
+
+
+
+
+
+ 
  
 
 
