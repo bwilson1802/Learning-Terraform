@@ -33,25 +33,40 @@ Build one VM and a network in Azure
 Build a peered network in 2 regions
 
 # Step 4
-Derek Morgan class deployment
+peered network in 2 regions using variables to avoid hardcoding
 
-# Step 5 
-AWS build - Does not work, still learning
+# Step 5
+buildin with count
 
 # Step 6
+Derek Morgan class deployment
+
+# Step 7 
+AWS build - Does not work, still learning
+
+# Step 8
 BICEP- Does not work, still learning
 
 # Future goals!
 
 
-# Step 7 
-Use variable to avoid hardcoding
-
-# Step 8 
+# Step  
 Multi provider deployment
 
-# Step 8 
-Google deployment 
+# Step  
+Google deployment
+
+# Step  
+ 
+
+
+
+
+
+
+
+
+
 
 
 
