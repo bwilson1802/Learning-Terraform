@@ -1,0 +1,10 @@
+
+
+
+
+resource _azurerm_resource_groups" "rg_count" {
+count = 10
+
+  name = rg_count-${count.index + 1}"
+  location = "USG"
+}
