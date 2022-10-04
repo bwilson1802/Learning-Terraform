@@ -4,8 +4,8 @@ In step 1 we setup a resource group.  In this step we will build on it.
 1.  Ls or dir (look where you are located) Git status displays where you are
 2.  Cd to the dir you want to be (is should say main or master)
 3.  If it still says your last branch name, git checkout main (or master)
-4.  You can open the file explorer and add folders like I have.  If you do that you have to cd to that folder.  You can also keep working out of main.tf but you will srite over your code each time.  
-5.  git pull (this bring everything to you so you have the most up to date info)
+4.  You can open the file explorer and add folders like I have.  If you do that you have to cd to that folder.  You can also keep working out of main.tf but you will write over your code each time.  
+5.  git pull (this brings everything to you so you have the most up to date info)
 6.  Git checkout -b (new name for this branch)
 7.  Copy Step2main.tf to your main.tf (or folder if you created them and cd to it)
 8.  Git push --set-upstream origin (your new name) (this is what tells GitHub that you made a new branch) 
@@ -51,7 +51,7 @@ resource "azurerm_windows_virtual_machine" "LOC-A-DC1"
 3.  Here is an example that you can add after the resource you are building.  I will use this more in the next step. 
 
 tags = {
-    enviornment = "dev"
+    environment = "dev"
   }
 
 # order of operations

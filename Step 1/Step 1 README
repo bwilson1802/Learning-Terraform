@@ -77,7 +77,7 @@ or “atom --wait” or your favorite
 2.  Under changes you should see the main.tf file.  There is a plus on the right side.  Click it
 3.  Above the commit button is a message block.  For this first one just type main.tf setup.  You can also click commit and it will open a new window for you to type your message in.  Keep in mind that you can view the commit messages to track your changes.  Make sure you have a good message here on the changes you made.  You can type git log in bash and it will show all commits that have been made to the project.
 4.  click sync
-5.  Your GitHub reposiory will now have the same data that is on your VS Code  
+5.  Your GitHub repository will now have the same data that is on your VS Code  
 
 # Run Terraform (bash terminal)
 1. az login (it will pop out a window for you to log in)

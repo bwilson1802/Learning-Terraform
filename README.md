@@ -18,6 +18,9 @@ Kevin Skoglund - Git Essentials training - LinkedIn Learning
 
 Josh Samuelson - Learning Terraform - LinkedIn Learning
 
+Alexander Shapoval - terraform-azurerm-aci - http://github.com/ashapoms
+Eugene Chuvyrov - terraform-azurerm-aci - https://github.com/Azure/terraform-azurerm-aci
+
 
 # My file breakdown 
 
@@ -33,10 +36,10 @@ Build one VM and a network in Azure
 Build a peered network in 2 regions
 
 # Step 4
-peered network in 2 regions using variables to avoid hardcoding
+Network build using variables to avoid hardcoding
 
 # Step 5
-buildin with count
+building with count
 
 # Step 6
 Derek Morgan class deployment
@@ -47,8 +50,10 @@ AWS build - Does not work, still learning
 # Step 8
 BICEP- Does not work, still learning
 
-# Future goals!
+# Step 9
+Containers and Docker
 
+# Future goals!
 
 # Step  
 Multi provider deployment
