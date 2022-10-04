@@ -22,6 +22,7 @@ Alexander Shapoval - terraform-azurerm-aci - http://github.com/ashapoms
 Eugene Chuvyrov - terraform-azurerm-aci - https://github.com/Azure/terraform-azurerm-aci
 
 
+
 # My file breakdown 
 
 # Step 1
@@ -39,7 +40,7 @@ Build a peered network in 2 regions
 Network build using variables to avoid hardcoding
 
 # Step 5
-building with count
+Building with count
 
 # Step 6
 Derek Morgan class deployment
