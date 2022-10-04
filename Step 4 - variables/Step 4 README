@@ -1,0 +1,77 @@
+
+# create two files
+1.  variables.tf
+2.  values.tfvars
+
+
+# setup for two values 
+
+resource _azurerm_resource_groups" "rg" {
+for_each = var.resource_groups
+
+  name = each.key
+  location = each.value
+}
+
+# setup for more than two values
+
+
+
+
+resource _azurerm_resource_groups" "rg_count" {
+count = 10
+
+  name = rg_count-${count.index + 1}"
+  location = "USG"
+}
+
+
+resource_groups = {
+
+    "rg-01" = "USGovTexas",
+
+    "rg-02" = "USGovTexas",
+
+    "rg-03" = "USGovTexas",
+
+    "rg-04" = "USGovTexas",
+
+    "rg-05" = "USGovTexas",
+
+}
+
+
+
+vnets = {
+
+    "vnet-01" = {
+
+        address_space       = ["192.168.0.0/24"]
+
+        location            = "USGovTexas"
+
+        resource_group_name = "rg-01"
+
+    },
+
+    "vnet-02" = {
+
+        address_space       = ["192.168.1.0/24"]
+
+        location            = "USGovTexas"
+
+        resource_group_name = "rg-02"
+
+    },
+
+    "vnet-03" = {
+
+        address_space       = ["192.168.2.0/24"]
+
+        location            = "USGovTexas"
+
+        resource_group_name = "rg-03"
+
+    },
+
+}

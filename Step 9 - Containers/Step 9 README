@@ -43,3 +43,6 @@ output "ip" {
 output "id" {
   value = "${module.aci.containergroup_id}"
 }
+
+
+
