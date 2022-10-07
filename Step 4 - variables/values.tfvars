@@ -1,14 +1,8 @@
 resource_group = {
-    "rg_01" = {
-  name = rg_01
-  location = "East US"
-  }
-
-"rg_02" = {
-  name = rg_02
-  location = "East US"
-  }
-
+   
+  "rg_01" = "East US"
+  
+  "rg_02" = "East US"
 }
 
 virtual_network = {
