@@ -23,7 +23,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-    for_each = var.resource_group
+    for_each = var.resource_group 
   
     name     = each.key
     location = each.value
@@ -36,4 +36,6 @@ resource "azurerm_resource_group" "rg" {
     resource_group_name = each.value.resource_group_name
     location            = each.value.location
     address_space       = each.value.address_space
+  
+  depends_on = [azurerm_resource_group.rg]
   }
