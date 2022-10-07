@@ -22,12 +22,8 @@ provider "azurerm" {
   features {}
 }
 
-##########################
-# East V-Net            #
-##########################
-
-resource _azurerm_resource_groups" "rg" {
-for_each = var.resource_groups
+resource "azurerm_resource_group" "rg" {
+for_each = var.resource_group
 
   name = each.key
   location = each.value

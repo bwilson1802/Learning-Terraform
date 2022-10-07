@@ -1,4 +1,4 @@
-variable "resource_groups" {
+variable "resource_group" {
     type = any
     default = null
 }
