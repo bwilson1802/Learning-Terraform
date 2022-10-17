@@ -27,9 +27,9 @@ resource "azurerm_resource_group" "rg" {
   
     name     = each.key
     location = each.value
-  }
+}
   
-  resource "azurerm_virtual_network" "VNET" {
+resource "azurerm_virtual_network" "VNET" {
     for_each = var.virtual_network
   
     name                = each.key
@@ -38,15 +38,15 @@ resource "azurerm_resource_group" "rg" {
     address_space       = each.value.address_space
   
   depends_on = [azurerm_resource_group.rg]
-  }
+}
 
-  resource "azurerm_subnet" "Subnet" {
-  for_each = var.subnet
+resource "azurerm_subnet" "Subnet" {
+  for_each = var.azurerm_subnet
   
   name                 = each.key
   resource_group_name  = each.value.resource_group_name
   virtual_network_name = each.value.virtual_network_name
-  address_prefixes     = each.address_prefixes
+  address_prefixes     = each.value.address_prefixes
   
   depends_on           = [azurerm_virtual_network.VNET]
 }
