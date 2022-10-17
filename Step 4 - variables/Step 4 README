@@ -1,3 +1,12 @@
+terraform plan -input=false -var-file="values.tfvars"
+
+terraform apply -auto-approve -var-file="values.tfvars"
+
+
+
+
+
+
 
 # create two files
 1.  variables.tf
@@ -15,7 +24,22 @@ for_each = var.resource_groups
 
 # setup for more than two values
 
-
+resource "azurerm_resource_group" "rg" {
+    for_each = var.resource_group
+  
+    name     = each.key
+    location = each.value
+  }
+  
+  resource "azurerm_virtual_network" "VNET" {
+    for_each = var.virtual_network
+  
+    name                = each.key
+    resource_group_name = each.value.resource_group_name
+    location            = each.value.location
+    address_space       = each.value.address_space
+  }
+  
 
 
 resource _azurerm_resource_groups" "rg_count" {
@@ -75,3 +99,152 @@ vnets = {
     },
 
 }
+
+
+
+resource "azurerm_subnet" "LOC-A-Subnet" {
+  name                 = "LOC-A-subnet"
+  resource_group_name  = azurerm_resource_group.East_US_RG.name
+  virtual_network_name = azurerm_virtual_network.EastUS-Network.name
+  address_prefixes     = ["10.10.0.0/24"]
+  depends_on           = [azurerm_virtual_network.EastUS-Network]
+}
+
+resource "azurerm_subnet" "LOC-B-Subnet" {
+  name                 = "LOC-B-subnet"
+  resource_group_name  = azurerm_resource_group.East_US_RG.name
+  virtual_network_name = azurerm_virtual_network.EastUS-Network.name
+  address_prefixes     = ["10.10.1.0/24"]
+  depends_on           = [azurerm_virtual_network.EastUS-Network]
+}
+
+##########################
+# LOC-A/B/C/D-DC1        #
+##########################
+
+resource "azurerm_network_interface" "LOC-A-DC1-NIC" {
+  name                = "LOC-A-DC1-NIC"
+  location            = azurerm_resource_group.East_US_RG.location
+  resource_group_name = azurerm_resource_group.East_US_RG.name
+  depends_on          = [azurerm_subnet.LOC-A-Subnet]
+
+  ip_configuration {
+    name                          = "EastUS-Network"
+    subnet_id                     = azurerm_subnet.LOC-A-Subnet.id
+    private_ip_address_allocation = "Dynamic"
+  }
+
+  tags = {
+    enviornment = "dev"
+  }
+}
+
+resource "azurerm_windows_virtual_machine" "LOC-A-DC1" {
+  name                  = "LOC-A-DC1"
+  resource_group_name   = azurerm_resource_group.East_US_RG.name
+  location              = azurerm_resource_group.East_US_RG.location
+  size                  = "Standard_B2s"
+  admin_username        = "adminuser"
+  admin_password        = "1qaz2wsx!QAZ@WSX"
+  network_interface_ids = [azurerm_network_interface.LOC-A-DC1-NIC.id]
+  depends_on            = [azurerm_network_interface.LOC-A-DC1-NIC]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "StandardSSD_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
+    version   = "latest"
+  }
+}
+
+##########################
+# LOC-B-DC1              #
+##########################
+
+resource "azurerm_network_interface" "LOC-B-DC1-NIC" {
+  name                = "LOC-B-DC1-NIC"
+  location            = azurerm_resource_group.East_US_RG.location
+  resource_group_name = azurerm_resource_group.East_US_RG.name
+  depends_on          = [azurerm_subnet.LOC-B-Subnet]
+
+  ip_configuration {
+    name                          = "EastUS-Network"
+    subnet_id                     = azurerm_subnet.LOC-B-Subnet.id
+    private_ip_address_allocation = "Dynamic"
+  }
+
+  tags = {
+    enviornment = "dev"
+  }
+}
+
+resource "azurerm_windows_virtual_machine" "LOC-B-DC1" {
+  name                  = "LOC-B-DC1"
+  resource_group_name   = azurerm_resource_group.East_US_RG.name
+  location              = azurerm_resource_group.East_US_RG.location
+  size                  = "Standard_B2s"
+  admin_username        = "adminuser"
+  admin_password        = "1qaz2wsx!QAZ@WSX"
+  network_interface_ids = [azurerm_network_interface.LOC-B-DC1-NIC.id]
+  depends_on            = [azurerm_network_interface.LOC-B-DC1-NIC]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "StandardSSD_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
+    version   = "latest"
+  }
+}
+
+##########################
+# Security               #
+##########################
+
+resource "azurerm_network_security_group" "EastUS-Sec-Group" {
+  name                = "EastUS-Sec-Group"
+  location            = azurerm_resource_group.East_US_RG.location
+  resource_group_name = azurerm_resource_group.East_US_RG.name
+
+  security_rule {
+    name                       = "test123"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_application_security_group" "EastUS-appsecuritygroup" {
+  name                = "EastUS-appsecuritygroup"
+  location            = azurerm_resource_group.East_US_RG.location
+  resource_group_name = azurerm_resource_group.East_US_RG.name
+
+  tags = {
+    environment = "Dev"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "LOC-A-Subnet-Sec-Group" {
+  subnet_id                 = azurerm_subnet.LOC-A-Subnet.id
+  network_security_group_id = azurerm_network_security_group.EastUS-Sec-Group.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "LOC-B-Subnet-Sec-Group" {
+  subnet_id                 = azurerm_subnet.LOC-B-Subnet.id
+  network_security_group_id = azurerm_network_security_group.EastUS-Sec-Group.id
+}
+
