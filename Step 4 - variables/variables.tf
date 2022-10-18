@@ -22,3 +22,18 @@ variable "azurerm_windows_virtual_machine" {
   type    = any
   default = null
 }
+
+variable "azurerm_network_security_group" {
+  type    = any
+  default = null
+}
+
+variable "azurerm_application_security_group" {
+  type    = any
+  default = null
+}
+
+variable "azurerm_subnet_network_security_group_association" {
+  type    = any
+  default = null
+}

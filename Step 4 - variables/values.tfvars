@@ -187,3 +187,73 @@ azurerm_windows_virtual_machine = {
   }
 }
 
+azurerm_network_security_group = {
+  "EastUS-Sec-Group-1" = {
+    name                = "EastUS-Sec-Group-1"
+    location            = "East US"
+    resource_group_name = "rg_01"
+
+    security_rule = {
+      name                       = "test123"
+      priority                   = 100
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+  },
+  "EastUS-Sec-Group-2" = {
+    name                = "EastUS-Sec-Group-2"
+    location            = "East US"
+    resource_group_name = "rg_01"
+
+    security_rule = {
+      name                       = "test123"
+      priority                   = 100
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+  }
+}
+
+azurerm_application_security_group = {
+  "App-Sec-Group-1" = {
+
+    name                = "EastUS-appsecuritygroup"
+    location            = "East US"
+    resource_group_name = "rg_01"
+    },
+  "App-Sec-Group-2" = {
+
+    name                = "EastUS-appsecuritygroup"
+    location            = "East US"
+    resource_group_name = "rg_02"
+    }
+}
+
+azurerm_subnet_network_security_group_association = { 
+  "LOC-A-Subnet-Sec-Group" = {
+    NIC_name                  = "LOC-A-DC1-NIC"
+    network_security_group_id = "App-Sec-Group-1"
+  },
+"LOC-B-Subnet-Sec-Group" = {
+    NIC_name                  = "LOC-B-DC1-NIC"
+    network_security_group_id = "App-Sec-Group-1"
+  },
+"LOC-C-Subnet-Sec-Group" = {
+    NIC_name                  = "LOC-C-DC1-NIC"
+    network_security_group_id = "App-Sec-Group-2"
+  },
+"LOC-D-Subnet-Sec-Group" = {
+    NIC_name                  = "LOC-D-DC1-NIC"
+    network_security_group_id = "App-Sec-Group-2"
+  }
+}

@@ -2,7 +2,7 @@ terraform plan -input=false -var-file="values.tfvars"
 
 terraform apply -auto-approve -var-file="values.tfvars"
 
-
+terraform destroy -auto-approve -var-file="values.tfvars"
 
 
 
@@ -40,80 +40,42 @@ resource "azurerm_resource_group" "rg" {
     location            = each.value.location
     address_space       = each.value.address_space
   }
-  
+} 
 
+# setup for nested values
 
-resource "azurerm_windows_virtual_machine" "LOC-A-DC1" {
-  name                  = "LOC-A-DC1"
-  resource_group_name   = azurerm_resource_group.East_US_RG.name
-  location              = azurerm_resource_group.East_US_RG.location
-  size                  = "Standard_B2s"
-  admin_username        = "adminuser"
-  admin_password        = "1qaz2wsx!QAZ@WSX"
-  network_interface_ids = [azurerm_network_interface.LOC-A-DC1-NIC.id]
-  depends_on            = [azurerm_network_interface.LOC-A-DC1-NIC]
+resource "azurerm_windows_virtual_machine" "VM" {
+  for_each = var.azurerm_windows_virtual_machine
+
+  name                  = each.key
+  resource_group_name   = each.value.resource_group_name
+  location              = each.value.location
+  size                  = each.value.size
+  admin_username        = each.value.admin_username
+  admin_password        = each.value.admin_password
+  network_interface_ids = [azurerm_network_interface.NIC[each.value.NIC_name].id]
+  depends_on            = [azurerm_network_interface.NIC]
 
   os_disk {
-    caching              = "ReadWrite"
-    storage_account_type = "StandardSSD_LRS"
+    caching              = each.value.os_disk.caching
+    storage_account_type = each.value.os_disk.storage_account_type
   }
 
   source_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
-    version   = "latest"
+    publisher = each.value.source_image_reference.publisher
+    offer     = each.value.source_image_reference.offer
+    sku       = each.value.source_image_reference.sku
+    version   = each.value.source_image_reference.version
+  }
+
+  tags = {
+    enviornment = "dev"
   }
 }
 
-azurerm_network_interface.NIC[each.value.network_interface_name].id 
-azurerm_network_interface.NIC[each.value.NIC_name].ids
 
 
-resource "azurerm_windows_virtual_machine" "LOC-B-DC1" {
-  name                  = "LOC-B-DC1"
-  resource_group_name   = azurerm_resource_group.East_US_RG.name
-  location              = azurerm_resource_group.East_US_RG.location
-  size                  = "Standard_B2s"
-  admin_username        = "adminuser"
-  admin_password        = "1qaz2wsx!QAZ@WSX"
-  network_interface_ids = [azurerm_network_interface.LOC-B-DC1-NIC.id]
-  depends_on            = [azurerm_network_interface.LOC-B-DC1-NIC]
 
-  os_disk {
-    caching              = "ReadWrite"
-    storage_account_type = "StandardSSD_LRS"
-  }
-
-  source_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
-    version   = "latest"
-  }
-}
-
-##########################
-# Security               #
-##########################
-
-resource "azurerm_network_security_group" "EastUS-Sec-Group" {
-  name                = "EastUS-Sec-Group"
-  location            = azurerm_resource_group.East_US_RG.location
-  resource_group_name = azurerm_resource_group.East_US_RG.name
-
-  security_rule {
-    name                       = "test123"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-}
 
 resource "azurerm_application_security_group" "EastUS-appsecuritygroup" {
   name                = "EastUS-appsecuritygroup"

@@ -98,3 +98,47 @@ resource "azurerm_windows_virtual_machine" "VM" {
     enviornment = "dev"
   }
 }
+
+resource "azurerm_network_security_group" "Sec-Group" {
+for_each = var.azurerm_network_security_group
+
+  name                = each.key
+  location            = each.value.location
+  resource_group_name = each.value.resource_group_name
+  depends_on = [azurerm_windows_virtual_machine.VM]
+
+  security_rule {
+    name                       = each.value.security_rule.name
+    priority                   = each.value.security_rule.priority
+    direction                  = each.value.security_rule.direction
+    access                     = each.value.security_rule.access
+    protocol                   = each.value.security_rule.protocol
+    source_port_range          = each.value.security_rule.source_port_range
+    destination_port_range     = each.value.security_rule.destination_port_range
+    source_address_prefix      = each.value.security_rule.source_address_prefix
+    destination_address_prefix = each.value.security_rule.destination_address_prefix
+  }
+}
+
+resource "azurerm_application_security_group" "appsecuritygroup" {
+  for_each = var.azurerm_application_security_group 
+  
+  name                = each.key
+  location            = each.value.location
+  resource_group_name = each.value.resource_group_name
+  depends_on = [azurerm_windows_virtual_machine.VM]
+
+  tags = {
+    environment = "Dev"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "Subnet-Sec-Group" {
+  for_each = var.azurerm_subnet_network_security_group_association
+  
+  subnet_id                 = each.key
+  network_security_group_id = each.value.network_security_group
+}
+
+
+
