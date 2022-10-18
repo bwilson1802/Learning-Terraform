@@ -70,7 +70,7 @@ resource "azurerm_network_interface" "NIC" {
   }
 }
 
-resource "azurerm_windows_virtual_machine" "LOC-A-DC1" {
+resource "azurerm_windows_virtual_machine" "VM" {
   for_each = var.azurerm_windows_virtual_machine
 
   name                  = each.key
@@ -79,7 +79,7 @@ resource "azurerm_windows_virtual_machine" "LOC-A-DC1" {
   size                  = each.value.size
   admin_username        = each.value.admin_username
   admin_password        = each.value.admin_password
-  network_interface_ids = azurerm_network_interface.NIC[each.value.NIC_name].ids
+  network_interface_ids = [azurerm_network_interface.NIC[each.value.NIC_name].id]
   depends_on            = [azurerm_network_interface.NIC]
 
   os_disk {
