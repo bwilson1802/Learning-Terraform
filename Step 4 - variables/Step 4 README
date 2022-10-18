@@ -22,6 +22,7 @@ for_each = var.resource_groups
   location = each.value
 }
 
+
 # setup for more than two values
 
 resource "azurerm_resource_group" "rg" {
@@ -41,103 +42,6 @@ resource "azurerm_resource_group" "rg" {
   }
   
 
-
-resource _azurerm_resource_groups" "rg_count" {
-count = 10
-
-  name = rg_count-${count.index + 1}"
-  location = "USG"
-}
-
-
-resource_groups = {
-
-    "rg-01" = "USGovTexas",
-
-    "rg-02" = "USGovTexas",
-
-    "rg-03" = "USGovTexas",
-
-    "rg-04" = "USGovTexas",
-
-    "rg-05" = "USGovTexas",
-
-}
-
-
-
-vnets = {
-
-    "vnet-01" = {
-
-        address_space       = ["192.168.0.0/24"]
-
-        location            = "USGovTexas"
-
-        resource_group_name = "rg-01"
-
-    },
-
-    "vnet-02" = {
-
-        address_space       = ["192.168.1.0/24"]
-
-        location            = "USGovTexas"
-
-        resource_group_name = "rg-02"
-
-    },
-
-    "vnet-03" = {
-
-        address_space       = ["192.168.2.0/24"]
-
-        location            = "USGovTexas"
-
-        resource_group_name = "rg-03"
-
-    },
-
-}
-
-
-
-resource "azurerm_subnet" "LOC-A-Subnet" {
-  name                 = "LOC-A-subnet"
-  resource_group_name  = azurerm_resource_group.East_US_RG.name
-  virtual_network_name = azurerm_virtual_network.EastUS-Network.name
-  address_prefixes     = ["10.10.0.0/24"]
-  depends_on           = [azurerm_virtual_network.EastUS-Network]
-}
-
-resource "azurerm_subnet" "LOC-B-Subnet" {
-  name                 = "LOC-B-subnet"
-  resource_group_name  = azurerm_resource_group.East_US_RG.name
-  virtual_network_name = azurerm_virtual_network.EastUS-Network.name
-  address_prefixes     = ["10.10.1.0/24"]
-  depends_on           = [azurerm_virtual_network.EastUS-Network]
-}
-
-##########################
-# LOC-A/B/C/D-DC1        #
-##########################
-
-resource "azurerm_network_interface" "LOC-A-DC1-NIC" {
-  name                = "LOC-A-DC1-NIC"
-  location            = azurerm_resource_group.East_US_RG.location
-  resource_group_name = azurerm_resource_group.East_US_RG.name
-  depends_on          = [azurerm_subnet.LOC-A-Subnet]
-
-  ip_configuration {
-    name                          = "EastUS-Network"
-    subnet_id                     = azurerm_subnet.LOC-A-Subnet.id
-    private_ip_address_allocation = "Dynamic"
-  }
-
-  tags = {
-    enviornment = "dev"
-  }
-}
 
 resource "azurerm_windows_virtual_machine" "LOC-A-DC1" {
   name                  = "LOC-A-DC1"
@@ -162,26 +66,9 @@ resource "azurerm_windows_virtual_machine" "LOC-A-DC1" {
   }
 }
 
-##########################
-# LOC-B-DC1              #
-##########################
+azurerm_network_interface.NIC[each.value.network_interface_name].id 
+azurerm_network_interface.NIC[each.value.NIC_name].ids
 
-resource "azurerm_network_interface" "LOC-B-DC1-NIC" {
-  name                = "LOC-B-DC1-NIC"
-  location            = azurerm_resource_group.East_US_RG.location
-  resource_group_name = azurerm_resource_group.East_US_RG.name
-  depends_on          = [azurerm_subnet.LOC-B-Subnet]
-
-  ip_configuration {
-    name                          = "EastUS-Network"
-    subnet_id                     = azurerm_subnet.LOC-B-Subnet.id
-    private_ip_address_allocation = "Dynamic"
-  }
-
-  tags = {
-    enviornment = "dev"
-  }
-}
 
 resource "azurerm_windows_virtual_machine" "LOC-B-DC1" {
   name                  = "LOC-B-DC1"
