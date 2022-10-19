@@ -100,12 +100,12 @@ resource "azurerm_windows_virtual_machine" "VM" {
 }
 
 resource "azurerm_network_security_group" "Sec-Group" {
-for_each = var.azurerm_network_security_group
+  for_each = var.azurerm_network_security_group
 
   name                = each.key
   location            = each.value.location
   resource_group_name = each.value.resource_group_name
-  depends_on = [azurerm_windows_virtual_machine.VM]
+  depends_on          = [azurerm_windows_virtual_machine.VM]
 
   security_rule {
     name                       = each.value.security_rule.name
@@ -121,12 +121,12 @@ for_each = var.azurerm_network_security_group
 }
 
 resource "azurerm_application_security_group" "appsecuritygroup" {
-  for_each = var.azurerm_application_security_group 
-  
+  for_each = var.azurerm_application_security_group
+
   name                = each.key
   location            = each.value.location
   resource_group_name = each.value.resource_group_name
-  depends_on = [azurerm_windows_virtual_machine.VM]
+  depends_on          = [azurerm_windows_virtual_machine.VM]
 
   tags = {
     environment = "Dev"
@@ -135,10 +135,9 @@ resource "azurerm_application_security_group" "appsecuritygroup" {
 
 resource "azurerm_subnet_network_security_group_association" "Subnet-Sec-Group" {
   for_each = var.azurerm_subnet_network_security_group_association
-  
-  subnet_id                 = each.key
-  network_security_group_id = each.value.network_security_group
+
+  subnet_id                 = azurerm_subnet.Subnet[each.key].id
+  network_security_group_id = each.value.network_security_group_name
+  depends_on                = [azurerm_application_security_group.appsecuritygroup]
 }
-
-
 

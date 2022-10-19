@@ -102,14 +102,14 @@ azurerm_network_interface = {
 
 azurerm_windows_virtual_machine = {
   "LOC-A-DC1" = {
-    name                  = "LOC-A-DC1"
-    resource_group_name   = "rg_01"
-    location              = "East US"
-    size                  = "Standard_B2s"
-    admin_username        = "adminuser"
-    admin_password        = "1qaz2wsx!QAZ@WSX"
-    NIC_name              = "LOC-A-DC1-NIC"
-  
+    name                = "LOC-A-DC1"
+    resource_group_name = "rg_01"
+    location            = "East US"
+    size                = "Standard_B2s"
+    admin_username      = "adminuser"
+    admin_password      = "1qaz2wsx!QAZ@WSX"
+    NIC_name            = "LOC-A-DC1-NIC"
+
     os_disk = {
       caching              = "ReadWrite"
       storage_account_type = "StandardSSD_LRS"
@@ -123,14 +123,14 @@ azurerm_windows_virtual_machine = {
     }
   },
   "LOC-B-DC1" = {
-    name                  = "LOC-B-DC1"
-    resource_group_name   = "rg_01"
-    location              = "East US"
-    size                  = "Standard_B2s"
-    admin_username        = "adminuser"
-    admin_password        = "1qaz2wsx!QAZ@WSX"
-    NIC_name              = "LOC-B-DC1-NIC"
-  
+    name                = "LOC-B-DC1"
+    resource_group_name = "rg_01"
+    location            = "East US"
+    size                = "Standard_B2s"
+    admin_username      = "adminuser"
+    admin_password      = "1qaz2wsx!QAZ@WSX"
+    NIC_name            = "LOC-B-DC1-NIC"
+
     os_disk = {
       caching              = "ReadWrite"
       storage_account_type = "StandardSSD_LRS"
@@ -144,14 +144,14 @@ azurerm_windows_virtual_machine = {
     }
   },
   "LOC-C-DC1" = {
-    name                  = "LOC-C-DC1"
-    resource_group_name   = "rg_02"
-    location              = "East US"
-    size                  = "Standard_B2s"
-    admin_username        = "adminuser"
-    admin_password        = "1qaz2wsx!QAZ@WSX"
-    NIC_name              = "LOC-C-DC1-NIC"
-  
+    name                = "LOC-C-DC1"
+    resource_group_name = "rg_02"
+    location            = "East US"
+    size                = "Standard_B2s"
+    admin_username      = "adminuser"
+    admin_password      = "1qaz2wsx!QAZ@WSX"
+    NIC_name            = "LOC-C-DC1-NIC"
+
     os_disk = {
       caching              = "ReadWrite"
       storage_account_type = "StandardSSD_LRS"
@@ -165,14 +165,14 @@ azurerm_windows_virtual_machine = {
     }
   },
   "LOC-D-DC1" = {
-    name                  = "LOC-D-DC1"
-    resource_group_name   = "rg_02"
-    location              = "East US"
-    size                  = "Standard_B2s"
-    admin_username        = "adminuser"
-    admin_password        = "1qaz2wsx!QAZ@WSX"
-    NIC_name              = "LOC-D-DC1-NIC"
-  
+    name                = "LOC-D-DC1"
+    resource_group_name = "rg_02"
+    location            = "East US"
+    size                = "Standard_B2s"
+    admin_username      = "adminuser"
+    admin_password      = "1qaz2wsx!QAZ@WSX"
+    NIC_name            = "LOC-D-DC1-NIC"
+
     os_disk = {
       caching              = "ReadWrite"
       storage_account_type = "StandardSSD_LRS"
@@ -230,30 +230,30 @@ azurerm_application_security_group = {
     name                = "EastUS-appsecuritygroup"
     location            = "East US"
     resource_group_name = "rg_01"
-    },
+  },
   "App-Sec-Group-2" = {
 
     name                = "EastUS-appsecuritygroup"
     location            = "East US"
     resource_group_name = "rg_02"
-    }
+  }
 }
 
-azurerm_subnet_network_security_group_association = { 
+azurerm_subnet_network_security_group_association = {
   "LOC-A-Subnet-Sec-Group" = {
-    NIC_name                  = "LOC-A-DC1-NIC"
-    network_security_group_id = "App-Sec-Group-1"
+    snet                    = "LOC-A-Subnet"
+    network_security_group_name = "App-Sec-Group-1"
   },
-"LOC-B-Subnet-Sec-Group" = {
-    NIC_name                  = "LOC-B-DC1-NIC"
-    network_security_group_id = "App-Sec-Group-1"
+  "LOC-B-Subnet-Sec-Group" = {
+    snet                    = "LOC-B-LOC-A-Subnet"
+    network_security_group_name = "App-Sec-Group-1"
   },
-"LOC-C-Subnet-Sec-Group" = {
-    NIC_name                  = "LOC-C-DC1-NIC"
-    network_security_group_id = "App-Sec-Group-2"
+  "LOC-C-Subnet-Sec-Group" = {
+    snet                    = "LOC-C-LOC-A-Subnet"
+    network_security_group_name = "App-Sec-Group-2"
   },
-"LOC-D-Subnet-Sec-Group" = {
-    NIC_name                  = "LOC-D-DC1-NIC"
-    network_security_group_id = "App-Sec-Group-2"
+  "LOC-D-Subnet-Sec-Group" = {
+    snet                    = "LOC-D-LOC-A-Subnet"
+    network_security_group_name = "App-Sec-Group-2"
   }
 }
