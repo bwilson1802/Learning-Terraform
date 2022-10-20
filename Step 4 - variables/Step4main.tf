@@ -22,6 +22,7 @@ provider "azurerm" {
   features {}
 }
 
+# 2 RG
 resource "azurerm_resource_group" "rg" {
   for_each = var.resource_group
 
@@ -29,6 +30,7 @@ resource "azurerm_resource_group" "rg" {
   location = each.value
 }
 
+# 4 VNETs
 resource "azurerm_virtual_network" "VNET" {
   for_each = var.virtual_network
 
@@ -40,6 +42,7 @@ resource "azurerm_virtual_network" "VNET" {
   depends_on = [azurerm_resource_group.rg]
 }
 
+# 2 subnets in each RG
 resource "azurerm_subnet" "Subnet" {
   for_each = var.azurerm_subnet
 
@@ -51,6 +54,7 @@ resource "azurerm_subnet" "Subnet" {
   depends_on = [azurerm_virtual_network.VNET]
 }
 
+# One NIC per VM
 resource "azurerm_network_interface" "NIC" {
   for_each = var.azurerm_network_interface
 
@@ -70,6 +74,7 @@ resource "azurerm_network_interface" "NIC" {
   }
 }
 
+# 2 VMs in each RG
 resource "azurerm_windows_virtual_machine" "VM" {
   for_each = var.azurerm_windows_virtual_machine
 
@@ -99,6 +104,7 @@ resource "azurerm_windows_virtual_machine" "VM" {
   }
 }
 
+# Each Vnet gets a sec group
 resource "azurerm_network_security_group" "Sec-Group" {
   for_each = var.azurerm_network_security_group
 
@@ -120,6 +126,7 @@ resource "azurerm_network_security_group" "Sec-Group" {
   }
 }
 
+# Each RG gets an app security group
 resource "azurerm_application_security_group" "appsecuritygroup" {
   for_each = var.azurerm_application_security_group
 
@@ -133,6 +140,7 @@ resource "azurerm_application_security_group" "appsecuritygroup" {
   }
 }
 
+# Each subnet gets an association 
 resource "azurerm_subnet_network_security_group_association" "Subnet-Sec-Group" {
   for_each = var.azurerm_subnet_network_security_group_association
 
@@ -141,3 +149,56 @@ resource "azurerm_subnet_network_security_group_association" "Subnet-Sec-Group" 
   depends_on                = [azurerm_application_security_group.appsecuritygroup]
 }
 
+resource "random_string" "Rand" {
+  length  = 8
+  special = false
+  upper   = false
+}
+
+output "resource_code" {
+  value = random_string.Rand.result
+}
+
+# Generate random text for a unique storage account name
+resource "random_id" "Rand-01" {
+  keepers = {
+    # Generate a new ID only when a new resource group is defined
+    resource_group = "rg_01"
+  }
+
+  byte_length = 8
+}
+
+resource "azurerm_storage_account" "mystorageaccount-01" {
+  name                     = "diag${random_id.Rand-01.hex}"
+  resource_group_name      = "rg_01"
+  location                 = "East US"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  depends_on               = [azurerm_application_security_group.appsecuritygroup]
+
+  tags = {
+    environment = "Dev"
+  }
+}
+
+resource "random_id" "Rand-02" {
+  keepers = {
+    resource_group = "rg_02"
+  }
+
+  byte_length = 8
+}
+
+resource "azurerm_storage_account" "mystorageaccount-02" {
+  name                     = "diag${random_id.Rand-02.hex}"
+  resource_group_name      = "rg_02"
+  location                 = "East US"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  depends_on               = [azurerm_application_security_group.appsecuritygroup]
+
+  tags = {
+    environment = "Dev"
+  }
+}

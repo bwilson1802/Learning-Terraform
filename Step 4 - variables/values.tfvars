@@ -208,7 +208,7 @@ azurerm_network_security_group = {
   "EastUS-Sec-Group-2" = {
     name                = "EastUS-Sec-Group-2"
     location            = "East US"
-    resource_group_name = "rg_01"
+    resource_group_name = "rg_02"
 
     security_rule = {
       name                       = "test123"
@@ -227,13 +227,13 @@ azurerm_network_security_group = {
 azurerm_application_security_group = {
   "App-Sec-Group-1" = {
 
-    name                = "EastUS-appsecuritygroup"
+    name                = "App-Sec-Group-1"
     location            = "East US"
     resource_group_name = "rg_01"
   },
   "App-Sec-Group-2" = {
 
-    name                = "EastUS-appsecuritygroup"
+    name                = "App-Sec-Group-2"
     location            = "East US"
     resource_group_name = "rg_02"
   }
@@ -241,19 +241,19 @@ azurerm_application_security_group = {
 
 azurerm_subnet_network_security_group_association = {
   "LOC-A-Subnet-Sec-Group" = {
-    snet                    = "LOC-A-Subnet"
+    snet                        = "LOC-A-Subnet"
     network_security_group_name = "EastUS-Sec-Group-1"
   },
   "LOC-B-Subnet-Sec-Group" = {
-    snet                    = "LOC-B-Subnet"
+    snet                        = "LOC-B-Subnet"
     network_security_group_name = "EastUS-Sec-Group-1"
   },
   "LOC-C-Subnet-Sec-Group" = {
-    snet                    = "LOC-C-Subnet"
+    snet                        = "LOC-C-Subnet"
     network_security_group_name = "EastUS-Sec-Group-2"
   },
   "LOC-D-Subnet-Sec-Group" = {
-    snet                    = "LOC-D-Subnet"
+    snet                        = "LOC-D-Subnet"
     network_security_group_name = "EastUS-Sec-Group-2"
   }
 }
