@@ -136,8 +136,8 @@ resource "azurerm_application_security_group" "appsecuritygroup" {
 resource "azurerm_subnet_network_security_group_association" "Subnet-Sec-Group" {
   for_each = var.azurerm_subnet_network_security_group_association
 
-  subnet_id                 = azurerm_subnet.Subnet[each.key].id
-  network_security_group_id = each.value.network_security_group_name
+  subnet_id                 = azurerm_subnet.Subnet[each.value.snet].id
+  network_security_group_id = azurerm_network_security_group.Sec-Group[each.value.network_security_group_name].id
   depends_on                = [azurerm_application_security_group.appsecuritygroup]
 }
 

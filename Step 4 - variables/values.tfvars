@@ -242,18 +242,18 @@ azurerm_application_security_group = {
 azurerm_subnet_network_security_group_association = {
   "LOC-A-Subnet-Sec-Group" = {
     snet                    = "LOC-A-Subnet"
-    network_security_group_name = "App-Sec-Group-1"
+    network_security_group_name = "EastUS-Sec-Group-1"
   },
   "LOC-B-Subnet-Sec-Group" = {
-    snet                    = "LOC-B-LOC-A-Subnet"
-    network_security_group_name = "App-Sec-Group-1"
+    snet                    = "LOC-B-Subnet"
+    network_security_group_name = "EastUS-Sec-Group-1"
   },
   "LOC-C-Subnet-Sec-Group" = {
-    snet                    = "LOC-C-LOC-A-Subnet"
-    network_security_group_name = "App-Sec-Group-2"
+    snet                    = "LOC-C-Subnet"
+    network_security_group_name = "EastUS-Sec-Group-2"
   },
   "LOC-D-Subnet-Sec-Group" = {
-    snet                    = "LOC-D-LOC-A-Subnet"
-    network_security_group_name = "App-Sec-Group-2"
+    snet                    = "LOC-D-Subnet"
+    network_security_group_name = "EastUS-Sec-Group-2"
   }
 }
