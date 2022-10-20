@@ -1,19 +1,13 @@
-terraform plan -input=false -var-file="values.tfvars"
+Welcome to Step 4!  The goal of this step is to not hardcode each item and start using variables.  
 
-terraform apply -auto-approve -var-file="values.tfvars"
-
-terraform destroy -auto-approve -var-file="values.tfvars"
-
-
-
-
-
-# create two files
+create two files
 1.  variables.tf
 2.  values.tfvars
 
 
-# setup for two values 
+Here is how we change the resources in main.ft to call each variable
+
+setup for two values 
 
 resource _azurerm_resource_groups" "rg" {
 for_each = var.resource_groups
@@ -23,15 +17,8 @@ for_each = var.resource_groups
 }
 
 
-# setup for more than two values
-
-resource "azurerm_resource_group" "rg" {
-    for_each = var.resource_group
-  
-    name     = each.key
-    location = each.value
-  }
-  
+setup for more than two values
+ 
   resource "azurerm_virtual_network" "VNET" {
     for_each = var.virtual_network
   
@@ -40,9 +27,9 @@ resource "azurerm_resource_group" "rg" {
     location            = each.value.location
     address_space       = each.value.address_space
   }
-} 
 
-# setup for nested values
+
+setup for nested values
 
 resource "azurerm_windows_virtual_machine" "VM" {
   for_each = var.azurerm_windows_virtual_machine
@@ -73,4 +60,14 @@ resource "azurerm_windows_virtual_machine" "VM" {
   }
 }
 
-[azurerm_network_security_group.Sec-Group[each.value.network_security_group_name].id]
+Add the resource name to the variables.tf file
+
+tfvars is where we write what each line will pull
+
+When you run the commands you need to call  the new files.  Here is an example
+
+terraform plan -input=false -var-file="values.tfvars"
+terraform apply -auto-approve -var-file="values.tfvars"
+terraform destroy -auto-approve -var-file="values.tfvars"
+
+

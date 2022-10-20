@@ -72,6 +72,15 @@ or “atom --wait” or your favorite
 2.  Copy the contents of step11main.tf and place it in your main.tf file
 3.  Once you have added the code, ctrl + s saves your changes
 
+# .gitnore
+1. Create a file and name it .gitnore
+2. We dont want to upload our tfstate files
+3. add the following to the file
+
+exe.
+terraform.tfstate*
+.terraform*
+
 # First commit (VS Code)
 1.  On the left side you will see source control as the third icon down.  Click it
 2.  Under changes you should see the main.tf file.  There is a plus on the right side.  Click it
