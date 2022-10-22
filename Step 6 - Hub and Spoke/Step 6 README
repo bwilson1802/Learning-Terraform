@@ -1,0 +1,6 @@
+terraform plan -input=false -var-file="values.tfvars"
+terraform apply -auto-approve -var-file="values.tfvars"
+terraform destroy -auto-approve -var-file="values.tfvars"
+
+azurerm_virtual_network.vnet[each.value.virtual_network.vnet].id
+each.value.remote_virtual_network_id
