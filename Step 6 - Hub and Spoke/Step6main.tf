@@ -197,10 +197,10 @@ variable "vnet_address_space" {
 
 resource "azurerm_virtual_network_peering" "Peering" {
   for_each = var.azurerm_virtual_network_peering
-  
+
   name                      = each.key
   resource_group_name       = each.value.resource_group_name
   virtual_network_name      = each.value.virtual_network_name
-  remote_virtual_network_id = azurerm_virtual_network.vnet[each.value.virtual_network].id
+  remote_virtual_network_id = azurerm_virtual_network.VNET[each.value.remote_virtual_network_name].id
 }
 

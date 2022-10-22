@@ -178,7 +178,7 @@ azurerm_network_security_group = {
       destination_address_prefix = "*"
     }
   },
-  "EastUS-Sec-Group-2" = {
+  "EastUS-Sec-Group-3" = {
     name                = "EastUS-Sec-Group-3"
     location            = "East US"
     resource_group_name = "rg_01"
@@ -223,27 +223,27 @@ azurerm_subnet_network_security_group_association = {
 
 azurerm_virtual_network_peering = {
   "A-to-B-peering" = {
-    name                      = "A-to-B-peering"
-    resource_group_name       = "rg_01"
-    virtual_network_name      = "vnet-01"
-    remote_virtual_network_id = "vnet-02"
+    name                        = "A-to-B-peering"
+    resource_group_name         = "rg_01"
+    virtual_network_name        = "vnet-01"
+    remote_virtual_network_name = "vnet-02"
   },
- "B-to_A-Peering" = {
-    name                      = "A-to-B-peering"
-    resource_group_name       = "rg_01"
-    virtual_network_name      = "vnet-02"
-    remote_virtual_network_id = "vnet-01"
+  "B-to_A-Peering" = {
+    name                        = "A-to-B-peering"
+    resource_group_name         = "rg_01"
+    virtual_network_name        = "vnet-02"
+    remote_virtual_network_name = "vnet-01"
   },
   "C-to-B-peering" = {
-    name                      = "C-to-B-peering"
-    resource_group_name       = "rg_01"
-    virtual_network_name      = "vnet-03"
-    remote_virtual_network_id = "vnet-02"
+    name                        = "C-to-B-peering"
+    resource_group_name         = "rg_01"
+    virtual_network_name        = "vnet-03"
+    remote_virtual_network_name = "vnet-02"
   },
   "B-to-C-peering" = {
-    name                      = "B-to-C-peering"
-    resource_group_name       = "rg_01"
-    virtual_network_name      = "vnet-02"
-    remote_virtual_network_id = "vnet-03"
+    name                        = "B-to-C-peering"
+    resource_group_name         = "rg_01"
+    virtual_network_name        = "vnet-02"
+    remote_virtual_network_name = "vnet-03"
   }
 }
