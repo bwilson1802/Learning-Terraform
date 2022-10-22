@@ -51,19 +51,7 @@ AWS build - Does not work, still learning
 # Step 8
 BICEP- Does not work, still learning
 
-# Step 9
-Containers and Docker
 
-# Future goals!
-
-# Step  
-Multi provider deployment
-
-# Step  
-Google deployment
-
-# Step  
- 
 
 
 
