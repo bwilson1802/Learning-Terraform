@@ -43,13 +43,13 @@ Network build using variables to avoid hardcoding
 Building with count
 
 # Step 6
+Hub and Spoke
+
+# Step 7
 Derek Morgan class deployment
 
-# Step 7 
+# Step 8 
 AWS build - Does not work, still learning
-
-# Step 8
-BICEP- Does not work, still learning
 
 
 
